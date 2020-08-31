@@ -8,6 +8,7 @@ from falcon_swagger_ui import register_swaggerui_app
 
 from ._singleton import Singleton
 
+
 class RackioSwagger(Singleton):
 
     def __init__(self):

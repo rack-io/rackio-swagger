@@ -77,7 +77,72 @@ class SwaggerCore(Singleton):
                         "tags": ["tags"]                      
                     },
                 },
-                #"/api/history/{tag_id}": {}
+                "/history/{tag_id}": {
+                    "get": {
+                        "responses": {
+                            200: {
+                                "description": "Success"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "tag_id",
+                                "required": True,
+                                "in": "path",
+                                "type": "string"
+                            }
+                        ],
+                        "tags": ["history"]
+                    },
+                },
+                "/trends": {
+                    "post": {
+                        "responses": {
+                            200: {
+                                "description": "Success"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "payload",
+                                "required": True,
+                                "in": "body",
+                                "schema": {
+                                    "$ref": "#/definitions/trend_model"
+                                }
+                            }
+                        ],
+                        "tags": ["trends"]
+                    }
+                },
+                "/trends/{tag_id}": {
+                    "parameters": [
+                        {
+                            "name": "tag_id",
+                            "required": True,
+                            "in": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "post": {
+                        "responses": {
+                            200: {
+                                "description": "Success"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "payload",
+                                "required": True,
+                                "in": "body",
+                                "schema": {
+                                    "$ref": "#/definitions/trend_model"
+                                }
+                            }
+                        ],
+                        "tags": ["trends"]
+                    }
+                },
             },
             "info": {
                 "title": "Rackio Engine API",
@@ -93,7 +158,11 @@ class SwaggerCore(Singleton):
                 },
                 {
                     "name": "history",
-                    "description": "Namespace for history"
+                    "description": "Namespace for tag history"
+                },
+                {
+                    "name": "trends",
+                    "description": "Namespace for tag trends"
                 }
             ],
             "definitions": {
@@ -104,6 +173,27 @@ class SwaggerCore(Singleton):
                             "type": "string",
                             "description": "String representation of tag value"
                         }
+                    },
+                    "type": "object"
+                },
+                "trend_model": {
+                    "required": ["tags", "tstart", "tstop"],
+                    "properties": {
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "List of Strings representing tag names"
+                        },
+                        "tstart": {
+                            "type": "string",
+                            "description": "Start time for trend (format: %Y-%m-%d %H:%M:%S)"
+                        },
+                        "tstop": {
+                            "type": "string",
+                            "description": "Start time for trend (format: %Y-%m-%d %H:%M:%S)"
+                        },
                     },
                     "type": "object"
                 }
@@ -137,7 +227,7 @@ class SwaggerCore(Singleton):
             api, url, schema,
             page_title=title,
             favicon_url=favicon,
-            config={'supportedSubmitMethods': ['get'], }
+            config={'supportedSubmitMethods': ['get', 'post'], }
         )
 
         self.register_schema()

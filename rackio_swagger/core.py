@@ -11,7 +11,9 @@ class RackioSwagger(Singleton):
     def __init__(self):
 
         super(RackioSwagger, self).__init__()
+        
+        self.app = None
 
-    def __call__(self):
+    def __call__(self, app):
 
-        pass
+        self.app = app

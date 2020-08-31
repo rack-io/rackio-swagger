@@ -66,6 +66,12 @@ class SwaggerCore(Singleton):
                             },
                         "parameters": [
                             {
+                                "name": "tag_id",
+                                "required": True,
+                                "in": "path",
+                                "type": "string"
+                            },
+                            {
                                 "name": "payload",
                                 "required": True,
                                 "in": "body",

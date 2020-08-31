@@ -9,16 +9,16 @@ from falcon_swagger_ui import register_swaggerui_app
 from ._singleton import Singleton
 
 
-class RackioSwagger(Singleton):
+class SwaggerCore(Singleton):
 
     def __init__(self):
 
-        super(RackioSwagger, self).__init__()
+        super(SwaggerCore, self).__init__()
         
         self.app = None
 
         self.SWAGGERUI_URL = '/swagger'
-        self.SCHEMA_URL = '/static/swagger.json'
+        self.SCHEMA_URL = 'http://petstore.swagger.io/v2/swagger.json'
 
         self.page_title = 'Rackio Swagger Doc'
         self.favicon_url = 'https://falconframework.org/favicon-32x32.png'
@@ -42,3 +42,5 @@ class RackioSwagger(Singleton):
     def __call__(self, app):
 
         self.app = app
+
+        self.register_swagger()

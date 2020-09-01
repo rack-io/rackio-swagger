@@ -6,7 +6,7 @@ This module implements the core app class and methods for Rackio Swagger UI.
 
 import json
 
-from falcon_swagger_ui import register_swaggerui_app
+from .falcon_swagger_ui import register_swaggerui_app
 from ._singleton import Singleton
 from .schema import get_schema
 
@@ -48,7 +48,12 @@ class SwaggerCore(Singleton):
             api, url, schema,
             page_title=title,
             favicon_url=favicon,
-            config={'supportedSubmitMethods': ['get', 'post'], }
+            config={
+                'supportedSubmitMethods': ['get', 'post'],
+                'SwaggerUIStandalonePreset': {
+                    'TopbarPlugin': False
+                }
+            }
         )
 
         self.register_schema()

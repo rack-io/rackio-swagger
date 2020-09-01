@@ -1,2 +1,0 @@
-recursive-include rackio_swagger/falcon_swagger_ui/templates *
-recursive-include rackio_swagger/falcon_swagger_ui/dist *

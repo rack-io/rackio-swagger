@@ -126,32 +126,147 @@ def get_schema():
                         }
                     ],
                     "tags": ["trends"]
-                },
-                "/controls": {
-
-                },
-                "/controls/{control_name}": {
-
-                },
-                "/rules": {
-
-                },
-                "/rules/{rule_name}": {
-
-                },
-                "/alarms": {
-
-                },
-                "/alarms/{alarm_name}": {
-
-                },
-                "/events": {
-
-                },
-                "/summary": {
-
                 }
             },
+            "/controls": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "tags": ["controls"]
+                }
+            },
+            "/controls/{control_name}": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "parameters": [
+                        {
+                            "name": "control_name",
+                            "required": True,
+                            "in": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "tags": ["controls"] 
+                }
+            },
+            "/rules": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "tags": ["controls"]
+                }
+            },
+            "/rules/{rule_name}": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "parameters": [
+                        {
+                            "name": "rule_name",
+                            "required": True,
+                            "in": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "tags": ["controls"] 
+                }
+            },
+            "/alarms": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "tags": ["alarms"]
+                }
+            },
+            "/alarms/{alarm_name}": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "parameters": [
+                        {
+                            "name": "alarm_name",
+                            "required": True,
+                            "in": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "tags": ["alarms"] 
+                },
+                "post": {
+                    "responses": {
+                            200: {
+                                "description": "Success"
+                            }
+                        },
+                    "parameters": [
+                        {
+                            "name": "alarm_name",
+                            "required": True,
+                            "in": "path",
+                            "type": "string"
+                        },
+                        {
+                            "name": "payload",
+                            "required": True,
+                            "in": "body",
+                            "schema": {
+                                "$ref": "#/definitions/alarm_model"
+                            }
+                        }
+                    ],
+                    "tags": ["alarms"]
+                }
+            },
+            "/events": {
+                "get": {
+                    "responses": {
+                        200: {
+                            "description": "Success"
+                        }
+                    },
+                    "tags": ["events"]
+                },
+                "post": {
+                    "responses": {
+                            200: {
+                                "description": "Success"
+                            }
+                        },
+                    "parameters": [
+                        {
+                            "name": "payload",
+                            "required": True,
+                            "in": "body",
+                            "schema": {
+                                "$ref": "#/definitions/event_model"
+                            }
+                        }
+                    ],
+                    "tags": ["events"]
+                }
+            },
+            "/summary": {
+
+            }
         },
         "info": {
             "title": "Rackio Engine API",
@@ -172,6 +287,18 @@ def get_schema():
             {
                 "name": "trends",
                 "description": "Namespace for tag trends"
+            },
+            {
+                "name": "controls",
+                "description": "Namespace for controls"
+            },
+            {
+                "name": "alarms",
+                "description": "Namespace for alarms"
+            },
+            {
+                "name": "events",
+                "description": "Namespace for events"
             }
         ],
         "definitions": {
@@ -202,6 +329,38 @@ def get_schema():
                     "tstop": {
                         "type": "string",
                         "description": "Start time for trend (format: %Y-%m-%d %H:%M:%S)"
+                    },
+                },
+                "type": "object"
+            },
+            "alarm_model": {
+                "required": ["action"],
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "description": "Action to perform on Alarm 'Acknowledge', 'Disable', 'Enable' or 'Reset'."
+                    }
+                },
+                "type": "object"
+            },
+            "event_model": {
+                "required": ["user", "message", "description", "priority"],
+                "properties": {
+                    "user": {
+                        "type": "string",
+                        "description": "Username logging the event"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Event short message"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Event description"
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "Event priority"
                     },
                 },
                 "type": "object"

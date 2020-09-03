@@ -42,4 +42,5 @@ def writer1():
 
 if __name__ == "__main__":
 
+    app.set_db(dbfile="test.db")
     app.run(8030)

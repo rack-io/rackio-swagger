@@ -264,6 +264,31 @@ def get_schema():
                     "tags": ["events"]
                 }
             },
+            "/blobs": {
+                "post": {
+                    "responses": {
+                        201: {
+                            "description": "Success"
+                        }
+                    },
+                    "consumes": "multipart/form-data",
+                    "parameters": [
+                        {
+                            "in": "formData",
+                            "name": "name",
+                            "type": "string",
+                            "required": True
+                        },
+                        {
+                            "in": "formData",
+                            "name": "file",
+                            "type": "file",
+                            "required": True
+                        }
+                    ],
+                    "tags": ["blobs"]
+                }
+            },
             "/summary": {
 
             }
@@ -274,7 +299,7 @@ def get_schema():
             "description": "Rackio Engine RESTful API for system integration"
         },
         "produces": ["application/json"],
-        "consumes": ["application/json"],
+        "consumes": ["application/json", "multipart/form-data"],
         "tags": [
             {
                 "name": "tags",
@@ -299,6 +324,10 @@ def get_schema():
             {
                 "name": "events",
                 "description": "Namespace for events"
+            },
+            {
+                "name": "blobs",
+                "description": "Namespace for blobs"
             }
         ],
         "definitions": {

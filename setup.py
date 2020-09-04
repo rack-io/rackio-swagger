@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RackioSwagger",
-    version="0.5",
+    version="0.6",
     author="Nelson Carrasquel",
     author_email="rackio.framework@outlook.com",
     description="A Rackio extension to enable Swagger UI in API definitions",
@@ -20,6 +20,7 @@ setuptools.setup(
     install_requires=[
         'falcon',
         'Jinja2',
+        'deepmerge',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -1,1 +1,2 @@
 falcon-swagger-ui==1.2.1
+deepmerge==0.1.0

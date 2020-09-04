@@ -287,6 +287,24 @@ swagger = {
                 "tags": ["blobs"]
             }
         },
+        "/blobs/{blob_name}": {
+            "get": {
+                "responses": {
+                    200: {
+                        "description": "Success"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "blob_name",
+                        "required": True,
+                        "in": "path",
+                        "type": "string"
+                    }
+                ],
+                "tags": ["blobs"] 
+            }
+        },
         "/summary": {
 
         }

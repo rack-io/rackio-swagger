@@ -34,11 +34,11 @@ class SwaggerCore(Singleton):
 
                 resp.body = json.dumps(get_schema(), ensure_ascii=False)
 
-        self.app._api.add_route('/swagger/swagger.json', SwaggerSchema())
+        self.app.add_route('/swagger/swagger.json', SwaggerSchema())
 
     def register_swagger(self):
 
-        api = self.app._api
+        api = self.app._api_manager.app
         url = self.SWAGGERUI_URL
         schema = self.SCHEMA_URL
         title = self.page_title

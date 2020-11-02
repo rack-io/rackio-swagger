@@ -30,6 +30,10 @@ class SwaggerCore(Singleton):
 
         class SwaggerSchema:
 
+            auth = {
+                'auth_disabled': True
+            }
+
             def on_get(self, req, resp):
 
                 resp.body = json.dumps(get_schema(), ensure_ascii=False)

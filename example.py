@@ -40,6 +40,8 @@ def writer1():
         if T1 <= 5:
             direction *= -1
 
+app.define_user("rackio", "12345678")
+
 if __name__ == "__main__":
 
     app.set_db(dbfile="test.db")

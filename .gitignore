@@ -8,6 +8,8 @@ __pycache__/
 
 # Database files
 *.db
+*.db-shm
+*.db-wal
 
 # Distribution / packaging
 .Python

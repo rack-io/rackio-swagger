@@ -30,6 +30,10 @@ class TemplateRenderer(object):
 
 
 class StaticSinkAdapter(object):
+    
+    auth = {
+        'auth_disabled': True
+    }
 
     def __init__(self, static_path):
         curr_dir = os.path.dirname(os.path.abspath(__file__))
@@ -51,6 +55,10 @@ class StaticSinkAdapter(object):
 
 
 class SwaggerUiResource(object):
+
+    auth = {
+        'auth_disabled': True
+    }
 
     def __init__(self, templates_folder, default_context):
         self.templates = TemplateRenderer(templates_folder)

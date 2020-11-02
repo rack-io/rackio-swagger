@@ -8,6 +8,45 @@ swagger = {
     "swagger": "2.0",
     "basePath": "/api",
     "paths": {
+        "/login": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": True,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/login_model"
+                        }
+                    }
+                ],
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/logout": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
         "/tags": {
             "get": {
                 "responses": {
@@ -15,6 +54,11 @@ swagger = {
                         "description": "Success"
                     }
                 },
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["tags"]
             }
         },
@@ -31,6 +75,11 @@ swagger = {
                         "required": True,
                         "in": "path",
                         "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apikey": []
                     }
                 ],
                 "tags": ["tags"] 
@@ -57,6 +106,11 @@ swagger = {
                         }
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["tags"]                      
             },
         },
@@ -73,6 +127,11 @@ swagger = {
                         "required": True,
                         "in": "path",
                         "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apikey": []
                     }
                 ],
                 "tags": ["history"]
@@ -93,6 +152,11 @@ swagger = {
                         "schema": {
                             "$ref": "#/definitions/trend_model"
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "apikey": []
                     }
                 ],
                 "tags": ["trends"]
@@ -123,6 +187,11 @@ swagger = {
                         }
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["trends"]
             }
         },
@@ -133,6 +202,11 @@ swagger = {
                         "description": "Success"
                     }
                 },
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["controls"]
             }
         },
@@ -151,6 +225,11 @@ swagger = {
                         "type": "string"
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["controls"] 
             }
         },
@@ -161,6 +240,11 @@ swagger = {
                         "description": "Success"
                     }
                 },
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["controls"]
             }
         },
@@ -179,6 +263,11 @@ swagger = {
                         "type": "string"
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["controls"] 
             }
         },
@@ -189,6 +278,11 @@ swagger = {
                         "description": "Success"
                     }
                 },
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["alarms"]
             }
         },
@@ -205,6 +299,11 @@ swagger = {
                         "required": True,
                         "in": "path",
                         "type": "string"
+                    }
+                ],
+                "security": [
+                    {
+                        "apikey": []
                     }
                 ],
                 "tags": ["alarms"] 
@@ -229,6 +328,11 @@ swagger = {
                         "schema": {
                             "$ref": "#/definitions/alarm_model"
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "apikey": []
                     }
                 ],
                 "tags": ["alarms"]
@@ -259,6 +363,11 @@ swagger = {
                         }
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["events"]
             }
         },
@@ -284,6 +393,11 @@ swagger = {
                         "required": True
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["blobs"]
             }
         },
@@ -302,6 +416,11 @@ swagger = {
                         "type": "string"
                     }
                 ],
+                "security": [
+                    {
+                        "apikey": []
+                    }
+                ],
                 "tags": ["blobs"] 
             }
         },
@@ -316,7 +435,18 @@ swagger = {
     },
     "produces": ["application/json"],
     "consumes": ["application/json", "multipart/form-data"],
+    "securityDefinitions": {
+        "apikey": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
     "tags": [
+        {
+            "name": "auth",
+            "description": "Namespace for authentication"
+        },
         {
             "name": "tags",
             "description": "Namespace for tags"
@@ -347,6 +477,23 @@ swagger = {
         }
     ],
     "definitions": {
+        "login_model": {
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "Username"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password"
+                }
+            },
+            "type": "object"
+        },
         "tag_model": {
             "required": ["value"],
             "properties": {
